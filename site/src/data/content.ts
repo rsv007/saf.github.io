@@ -27,8 +27,8 @@ export const SITE = {
   role: "Laboratory Animal Medicine Resident · Yale School of Medicine",
   tagline:
     "Veterinarian providing clinical care across nonhuman primate, rodent, agricultural and exotic research species.",
-  seeking:
-    "Completing residency June 2027 and seeking clinical veterinarian roles in laboratory animal programs.",
+  // Optional line under the tagline (e.g. what role she's looking for). Leave "" to hide it.
+  seeking: "[ASK SHAINA: optional line about the role you're looking for, or leave empty]",
   location: "Connecticut",
   relocation: "[ASK SHAINA: open to relocation?]",
 
@@ -266,7 +266,8 @@ export const TESTIMONIALS: { quote: string; name: string; role: string }[] = [];
 
 /* ---------- CONTACT ------------------------------------------------------- */
 export const CONTACT = {
-  heading: "Let's talk",
-  text: "I'm happy to hear about clinical veterinarian opportunities in laboratory animal programs. Email is the best way to reach me.",
+  heading: "Get in touch",
+  // A short line in Shaina's own words. Leave "" to hide it.
+  text: "[ASK SHAINA: optional short contact message in your own words, or leave empty]",
   showForm: true, // simple contact form (works once the site is hosted on Netlify)
 };

@@ -9,8 +9,8 @@ const linkedinReady = SITE.linkedin.startsWith("http");
 <Section id="contact" eyebrow="Contact" title={CONTACT.heading}>
   <div class="grid gap-8 md:grid-cols-2">
     <div>
-      <p class="text-lg">{CONTACT.text}</p>
-      <div class="card mt-6 flex flex-wrap items-center gap-3 p-4">
+      {CONTACT.text && <p class="mb-6 text-lg"><T text={CONTACT.text} /></p>}
+      <div class="card flex flex-wrap items-center gap-3 p-4">
         <a href={`mailto:${SITE.email}`} class="btn btn-primary"><Mail class="size-4" stroke-width={2.25} aria-hidden="true" /> {SITE.email}</a>
         <button type="button" class="copy-email btn btn-secondary" data-email={SITE.email}>
           <Copy class="icon-copy size-4" stroke-width={2.25} aria-hidden="true" />
