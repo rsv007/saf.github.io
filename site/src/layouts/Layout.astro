@@ -48,5 +48,16 @@ const ogImage = new URL("/og-image.png", SITE.url).href;
     <main id="main"><slot /></main>
     <Footer mascot={footerMascot} />
     {home && <PawTrail />}
+    <script>
+      // Fade each section in once when it comes into view (skipped with "reduce motion").
+      const root = document.documentElement;
+      if (root.classList.contains("motion-ok") && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        }, { rootMargin: "0px 0px -8% 0px" });
+        document.querySelectorAll(".reveal > *").forEach((el) => io.observe(el));
+        root.classList.add("reveal-ready");
+      }
+    </script>
   </body>
 </html>

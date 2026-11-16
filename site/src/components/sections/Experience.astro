@@ -5,8 +5,8 @@ import T from "../T.astro";
 ---
 <Section id="experience" eyebrow="Experience" title="Clinical experience">
   <ol class="timeline relative ml-2 pl-7 sm:ml-3 sm:pl-10">
-    {EXPERIENCE.map((job) => (
-      <li class="relative pb-10 last:pb-0">
+    {EXPERIENCE.map((job, i) => (
+      <li class="relative pb-10 last:pb-0" style={`--i:${i}`}>
         <span class="dot absolute top-2 -left-[calc(1.75rem+7px)] size-3 rounded-full bg-sage ring-4 ring-bg sm:-left-[calc(2.5rem+7px)]" aria-hidden="true"></span>
         <p class="text-sm font-semibold text-sage-ink">{job.dates}</p>
         <h3 class="mt-1 text-xl font-medium sm:text-2xl">{job.role}</h3>

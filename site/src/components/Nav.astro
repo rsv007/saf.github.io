@@ -38,9 +38,8 @@ const links = [
 </header>
 <style>
   .site-nav {
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* Nearly solid instead of blurred: blur is expensive to redraw while scrolling in Safari */
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
   }
   summary::-webkit-details-marker { display: none; }
 </style>

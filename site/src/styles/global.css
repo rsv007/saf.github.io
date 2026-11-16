@@ -128,28 +128,22 @@
   /* Gentle crossfade between pages (browsers that support it) */
   @view-transition { navigation: auto; }
 
-  /* Sections fade + slide up 16px as they enter view */
-  @supports (animation-timeline: view()) {
-    .reveal > * {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0 entry 160px;
-    }
-    /* Experience timeline: the line grows as you scroll through it */
-    .timeline::before {
-      animation: grow-y linear both;
-      animation-timeline: view();
-      animation-range: entry 15% cover 60%;
-    }
-    .timeline > li > .dot {
-      animation: pop linear both;
-      animation-timeline: view();
-      animation-range: entry 30% entry 70%;
-    }
+  /* Sections fade + slide up 16px once, when they come into view.
+     Time-based (not tied to the scroll wheel) so it looks smooth in every browser.
+     "reveal-ready" is only added by the script in Layout.astro, so without JS nothing is hidden. */
+  html.reveal-ready .reveal > * {
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
   }
-  @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
-  @keyframes grow-y { from { transform: scaleY(0); } }
-  @keyframes pop { from { opacity: 0; transform: scale(0.3); } }
+  html.reveal-ready .reveal > *:not(.in) { opacity: 0; transform: translateY(16px); }
+
+  /* Experience timeline: the line grows once, then the dots pop in one by one */
+  html.reveal-ready .timeline::before { transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s; }
+  html.reveal-ready .timeline:not(.in)::before { transform: scaleY(0); }
+  html.reveal-ready .timeline > li > .dot {
+    transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: calc(0.25s + var(--i, 0) * 0.3s);
+  }
+  html.reveal-ready .timeline:not(.in) > li > .dot { opacity: 0; transform: scale(0.3); }
 
   /* Peeking mouse slides up from behind its card (class added once when visible) */
   .peek-wrap .peek { transform: translateY(105%); transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s; }
@@ -202,3 +196,8 @@
 .paw.on { opacity: 0.75; }
 .paw:nth-child(odd) { transform: translateX(-9px) rotate(-12deg); }
 .paw:nth-child(even) { transform: translateX(5px) rotate(12deg); }
+
+/* Printing the homepage: show everything, even sections not scrolled to yet */
+@media print {
+  .reveal > *, .timeline::before, .timeline > li > .dot { opacity: 1 !important; transform: none !important; }
+}
