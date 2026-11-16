@@ -10,6 +10,7 @@ const { title, description = SITE.description, home = false, noindex = false, fo
 const fullName = `${SITE.name}, ${SITE.credential}`;
 const pageTitle = title ? `${title} · ${fullName}` : `${fullName} — Laboratory Animal Veterinarian`;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL("/og-image.png", SITE.url).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -25,11 +26,21 @@ const canonical = new URL(Astro.url.pathname, SITE.url).href;
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#FAF7F2" />
+    <meta name="author" content={fullName} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={fullName} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${fullName} — laboratory animal veterinarian`} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body class="min-h-screen">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-surface focus:px-4 focus:py-2">Skip to content</a>

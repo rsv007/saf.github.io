@@ -5,7 +5,7 @@ const { src = "", alt = "", hint = "", class: cls = "", eager = false } = Astro.
 ---
 <figure class:list={["relative overflow-hidden rounded-card", cls]}>
   {src ? (
-    <img src={src} alt={alt} class="h-full w-full object-cover" loading={eager ? "eager" : "lazy"} decoding="async" />
+    <img src={src} alt={alt || hint} class="h-full w-full object-cover" loading={eager ? "eager" : "lazy"} decoding="async" />
   ) : (
     <div class="photo-ph flex h-full w-full flex-col items-center justify-center gap-2 p-5 text-center">
       <Camera class="size-7 text-sage-ink" stroke-width={1.75} aria-hidden="true" />

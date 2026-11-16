@@ -18,7 +18,7 @@
    ========================================================================== */
 
 export const SITE = {
-  url: "https://example.com", // [ASK: final web address once the domain is chosen]
+  url: "https://example.com", // [ASK: final web address once the domain is chosen] — also update public/robots.txt
   name: "Shaina Furman",
   credential: "DVM",
   pronouns: "she/her",
