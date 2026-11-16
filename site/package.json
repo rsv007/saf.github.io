@@ -11,7 +11,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "offline": "node scripts/make-offline.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

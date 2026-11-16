@@ -6,3 +6,7 @@ dist/
 .env
 # Source CV drafts stay local (not published)
 *.docx
+
+# Offline preview (rebuild with: npm run offline)
+Shaina-Furman-website-preview/
+Shaina-Furman-website-preview.zip
