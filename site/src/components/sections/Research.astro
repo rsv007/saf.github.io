@@ -1,0 +1,45 @@
+---
+import { RESEARCH, PUBLICATIONS, PRESENTATIONS } from "@/data/content";
+import Section from "../Section.astro";
+import { BookOpen, Presentation, ExternalLink } from "@lucide/astro";
+import T from "../T.astro";
+---
+<Section id="research" eyebrow="Research" title="Research, publications & presentations">
+  <ul class="grid gap-5 md:grid-cols-2">
+    {RESEARCH.map((r) => (
+      <li class="card p-6">
+        <p class="text-sm font-semibold text-sage-ink">{r.year} · {r.org}</p>
+        <h3 class="mt-1 font-serif text-lg font-medium leading-snug">{r.title}</h3>
+        <p class="mt-2 text-muted">{r.text}</p>
+      </li>
+    ))}
+  </ul>
+  <div class="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+    {PUBLICATIONS.length > 0 && (
+      <div>
+        <h3 class="mb-4 flex items-center gap-2 text-2xl font-medium"><BookOpen class="size-6 text-sage-ink" stroke-width={1.75} aria-hidden="true" /> Publications</h3>
+        <ol class="space-y-5">
+          {PUBLICATIONS.map((p) => (
+            <li class="border-l-2 border-coral/60 pl-4">
+              <p class="font-semibold leading-snug">
+                {p.link ? <a href={p.link} class="underline decoration-coral/60 underline-offset-4 hover:decoration-coral">{p.title}<ExternalLink class="ml-1 inline size-3.5" aria-hidden="true" /></a> : p.title}
+              </p>
+              <p class="mt-1 text-sm text-muted"><T text={p.authors} /></p>
+              <p class="text-sm text-muted"><em><T text={p.venue} /></em>{p.year && <>, <T text={p.year} /></>}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+    {PRESENTATIONS.length > 0 && (
+      <div>
+        <h3 class="mb-4 flex items-center gap-2 text-2xl font-medium"><Presentation class="size-6 text-sage-ink" stroke-width={1.75} aria-hidden="true" /> Presentations</h3>
+        <ul class="space-y-3">
+          {PRESENTATIONS.map((p) => (
+            <li class="flex gap-3"><span class="w-12 shrink-0 text-sm font-semibold text-sage-ink pt-0.5">{p.year}</span><span>{p.title}</span></li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</Section>

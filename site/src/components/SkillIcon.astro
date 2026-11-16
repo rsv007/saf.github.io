@@ -1,0 +1,10 @@
+---
+// Maps a skill group's icon name (from content.ts) to a line icon.
+import { Stethoscope, Syringe, Scissors, Microscope, ShieldCheck, FlaskConical, MessageCircle, PawPrint } from "@lucide/astro";
+import MouseFace from "./mascots/MouseFace.astro";
+import RabbitFace from "./mascots/RabbitFace.astro";
+const { name = "", class: cls = "size-5" } = Astro.props;
+const map = { stethoscope: Stethoscope, syringe: Syringe, scissors: Scissors, microscope: Microscope, shield: ShieldCheck, flask: FlaskConical, message: MessageCircle };
+const Icon = map[name] ?? PawPrint;
+---
+{name === "mouse" ? <MouseFace class={cls} /> : name === "rabbit" ? <RabbitFace class={cls} /> : <Icon class={cls} stroke-width={1.75} aria-hidden="true" />}

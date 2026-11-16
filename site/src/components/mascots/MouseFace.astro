@@ -1,0 +1,18 @@
+---
+// Mouse mascot — face. Decorative only.
+const { class: cls = "", title } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="17" cy="21" r="10" fill="var(--surface)" />
+  <circle cx="47" cy="21" r="10" fill="var(--surface)" />
+  <circle cx="17" cy="21" r="5.5" fill="var(--coral-soft)" stroke="none" />
+  <circle cx="47" cy="21" r="5.5" fill="var(--coral-soft)" stroke="none" />
+  <path d="M32 19C42 19 48 26 48 34C48 42 40 50 32 52C24 50 16 42 16 34C16 26 22 19 32 19Z" fill="var(--surface)" />
+  <circle cx="25.5" cy="33" r="2.1" fill="currentColor" stroke="none" />
+  <circle cx="38.5" cy="33" r="2.1" fill="currentColor" stroke="none" />
+  <ellipse cx="22.5" cy="39.5" rx="2.6" ry="1.6" fill="var(--coral)" opacity=".35" stroke="none" />
+  <ellipse cx="41.5" cy="39.5" rx="2.6" ry="1.6" fill="var(--coral)" opacity=".35" stroke="none" />
+  <circle cx="32" cy="43" r="2.1" fill="var(--coral)" stroke="none" />
+  <path d="M29.2 46.6q1.4 1.5 2.8 0q1.4 1.5 2.8 0" stroke-width="1.6" />
+  <path d="M21 42.5L12 41M21 45.5L12.5 47M43 42.5L52 41M43 45.5L51.5 47" stroke-width="1.4" opacity=".55" />
+</svg>

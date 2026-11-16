@@ -1,0 +1,14 @@
+---
+// Mouse peeking over an edge (sits on top of a card). Decorative only.
+const { class: cls = "" } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="overflow:hidden">
+  <circle cx="17" cy="20" r="9.5" fill="var(--surface)" />
+  <circle cx="47" cy="20" r="9.5" fill="var(--surface)" />
+  <circle cx="17" cy="20" r="5" fill="var(--coral-soft)" stroke="none" />
+  <circle cx="47" cy="20" r="5" fill="var(--coral-soft)" stroke="none" />
+  <path d="M15.5 41C15.5 27 22.5 19 32 19C41.5 19 48.5 27 48.5 41" fill="var(--surface)" />
+  <circle cx="26" cy="31" r="2.1" fill="currentColor" stroke="none" />
+  <circle cx="38" cy="31" r="2.1" fill="currentColor" stroke="none" />
+  <circle cx="32" cy="36.5" r="1.9" fill="var(--coral)" stroke="none" />
+</svg>

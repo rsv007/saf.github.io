@@ -1,0 +1,19 @@
+---
+// Heartbeat (ECG) line — the site's signature motif.
+// variant "hero": full line under the name.  "divider": faint section divider.
+const { variant = "hero", class: cls = "" } = Astro.props;
+---
+{variant === "hero" ? (
+  <svg class:list={["ecg", cls]} viewBox="0 0 400 48" fill="none" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M0 30H120L130 30L138 18L146 30H170L178 38L188 4L198 42L206 30H260L268 30L276 20L284 30H400"
+      stroke="var(--sage)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+  </svg>
+) : (
+  <div class:list={["flex items-center justify-center py-2", cls]} aria-hidden="true">
+    <svg viewBox="0 0 240 24" class="h-6 w-60 max-w-full" fill="none">
+      <path d="M0 14H96L102 14L107 6L112 14H118L123 19L129 2L135 22L140 14H240"
+        stroke="var(--sage)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity=".45" />
+    </svg>
+  </div>
+)}

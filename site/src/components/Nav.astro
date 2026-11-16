@@ -1,0 +1,58 @@
+---
+import { SITE } from "@/data/content";
+import { Moon, Sun, Menu } from "@lucide/astro";
+const { home = true } = Astro.props;
+const base = home ? "" : "/";
+const links = [
+  ["About", "#about"], ["Experience", "#experience"], ["Skills", "#skills"],
+  ["Research", "#research"], ["Credentials", "#credentials"], ["Contact", "#contact"],
+];
+---
+<header class="site-nav sticky top-0 z-40 border-b border-line/70 print:hidden">
+  <nav class="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6" aria-label="Main">
+    <a href="/" class="font-serif text-lg font-medium whitespace-nowrap">{SITE.name}, <span class="text-sage-ink">{SITE.credential}</span></a>
+    <ul class="hidden items-center gap-1 lg:flex">
+      {links.map(([label, href]) => (
+        <li><a href={base + href} class="rounded-full px-3 py-1.5 text-[0.95rem] text-muted transition-colors hover:bg-sage-soft hover:text-ink">{label}</a></li>
+      ))}
+      <li><a href="/cv" class="rounded-full px-3 py-1.5 text-[0.95rem] text-muted transition-colors hover:bg-sage-soft hover:text-ink">CV</a></li>
+    </ul>
+    <div class="flex items-center gap-1">
+      <button type="button" id="theme-toggle" class="grid size-10 place-items-center rounded-full text-muted hover:bg-sage-soft hover:text-ink" aria-label="Switch dark mode">
+        <Moon class="size-5 dark:hidden" stroke-width={1.75} aria-hidden="true" />
+        <Sun class="hidden size-5 dark:block" stroke-width={1.75} aria-hidden="true" />
+      </button>
+      <details class="mobile-menu relative lg:hidden">
+        <summary class="grid size-10 cursor-pointer list-none place-items-center rounded-full text-muted hover:bg-sage-soft hover:text-ink" aria-label="Menu">
+          <Menu class="size-5" stroke-width={1.75} aria-hidden="true" />
+        </summary>
+        <ul class="card absolute right-0 mt-2 w-48 p-2">
+          {links.map(([label, href]) => (
+            <li><a href={base + href} class="block rounded-lg px-3 py-2 hover:bg-sage-soft">{label}</a></li>
+          ))}
+          <li><a href="/cv" class="block rounded-lg px-3 py-2 hover:bg-sage-soft">CV</a></li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+</header>
+<style>
+  .site-nav {
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  summary::-webkit-details-marker { display: none; }
+</style>
+<script>
+  const btn = document.getElementById("theme-toggle");
+  btn?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme !== "dark";
+    if (dark) root.dataset.theme = "dark"; else delete root.dataset.theme;
+    try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
+  });
+  document.querySelectorAll<HTMLAnchorElement>(".mobile-menu a").forEach((a) =>
+    a.addEventListener("click", () => a.closest("details")?.removeAttribute("open"))
+  );
+</script>

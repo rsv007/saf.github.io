@@ -1,0 +1,16 @@
+---
+import { SITE } from "@/data/content";
+import RabbitSleeping from "./mascots/RabbitSleeping.astro";
+import Ecg from "./Ecg.astro";
+const year = new Date().getFullYear();
+---
+<footer class="mt-8 border-t border-line print:hidden">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-12 text-center sm:px-6">
+    <RabbitSleeping class="footer-rabbit h-14 w-auto text-ink" />
+    <p class="font-serif text-lg">Thanks for visiting.</p>
+    <p class="text-sm text-muted">
+      © {year} {SITE.name}, {SITE.credential} · Built with <a class="underline underline-offset-2 hover:text-ink" href="https://astro.build">Astro</a> ·
+      Based on the <a class="underline underline-offset-2 hover:text-ink" href="https://github.com/webrating/starfolio">Starfolio</a> template (MIT)
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,26 @@
+---
+// A photo, or (when src is empty) a placeholder frame showing where a photo goes.
+import { Camera } from "@lucide/astro";
+const { src = "", alt = "", hint = "", class: cls = "", eager = false } = Astro.props;
+---
+<figure class:list={["relative overflow-hidden rounded-card", cls]}>
+  {src ? (
+    <img src={src} alt={alt} class="h-full w-full object-cover" loading={eager ? "eager" : "lazy"} decoding="async" />
+  ) : (
+    <div class="photo-ph flex h-full w-full flex-col items-center justify-center gap-2 p-5 text-center">
+      <Camera class="size-7 text-sage-ink" stroke-width={1.75} aria-hidden="true" />
+      <span class="text-sm font-semibold text-ink">Photo goes here</span>
+      {hint && <span class="text-xs leading-snug text-muted max-w-[22ch]">{hint}</span>}
+    </div>
+  )}
+</figure>
+<style>
+  .photo-ph {
+    background:
+      radial-gradient(120% 80% at 20% 10%, var(--sage-soft), transparent 60%),
+      radial-gradient(100% 80% at 90% 100%, var(--coral-soft), transparent 55%),
+      var(--surface);
+    border: 1.5px dashed color-mix(in srgb, var(--sage) 60%, transparent);
+    border-radius: inherit;
+  }
+</style>

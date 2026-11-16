@@ -1,0 +1,44 @@
+---
+import { SPECIES, SKILLS, NUMBERS } from "@/data/content";
+import Section from "../Section.astro";
+import SkillIcon from "../SkillIcon.astro";
+import T from "../T.astro";
+---
+<Section id="skills" eyebrow="Clinical skills" title="Species and skills">
+  {NUMBERS.length > 0 && (
+    <dl class="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {NUMBERS.map((n) => (
+        <div class="card p-5 text-center">
+          <dt class="order-2 text-sm text-muted">{n.label}</dt>
+          <dd class="font-serif text-4xl text-sage-ink">{n.value}{n.suffix}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+  <div class="card p-6 sm:p-8">
+    <h3 class="text-2xl font-medium">Species experience</h3>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      {SPECIES.map((s) => (
+        <div>
+          <p class="mb-2 flex items-center gap-2 font-semibold">
+            {s.icon && <SkillIcon name={s.icon} class="size-7 text-ink" />}{s.group}
+          </p>
+          <ul class="flex flex-wrap gap-2">{s.items.map((i) => <li class="chip">{i}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {SKILLS.map((g) => (
+      <div class="card p-6">
+        <div class="mb-3 flex items-center gap-3">
+          <span class="grid size-10 place-items-center rounded-full bg-sage-soft text-sage-ink"><SkillIcon name={g.icon} /></span>
+          <h3 class="font-serif text-lg font-medium">{g.group}</h3>
+        </div>
+        <ul class="space-y-1.5 text-muted">
+          {g.items.map((i) => <li class="flex gap-2"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-sage" aria-hidden="true"></span><span><T text={i} /></span></li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Section>

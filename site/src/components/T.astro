@@ -1,0 +1,6 @@
+---
+// Prints text. Any "[ASK ...]" placeholder is highlighted so it can't be missed.
+const { text = "" } = Astro.props;
+const parts = String(text).split(/(\[ASK[^\]]*\])/g).filter(Boolean);
+---
+{parts.map((p) => (p.startsWith("[ASK") ? <mark class="ask">{p}</mark> : p))}

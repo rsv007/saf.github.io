@@ -1,9 +1,30 @@
 ---
-export const prerender = true;
-import Layout from "../layouts/Layout.astro";
-import HomePage from "@/components/HomePage";
+import Layout from "@/layouts/Layout.astro";
+import Ecg from "@/components/Ecg.astro";
+import Hero from "@/components/sections/Hero.astro";
+import About from "@/components/sections/About.astro";
+import Photos from "@/components/sections/Photos.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Skills from "@/components/sections/Skills.astro";
+import Research from "@/components/sections/Research.astro";
+import Credentials from "@/components/sections/Credentials.astro";
+import Testimonials from "@/components/sections/Testimonials.astro";
+import Contact from "@/components/sections/Contact.astro";
 ---
-
-<Layout>
-  <HomePage client:only="react" />
+<Layout home>
+  <Hero />
+  <Ecg variant="divider" />
+  <About />
+  <Photos />
+  <Ecg variant="divider" />
+  <Experience />
+  <Ecg variant="divider" />
+  <Skills />
+  <Ecg variant="divider" />
+  <Research />
+  <Ecg variant="divider" />
+  <Credentials />
+  <Testimonials />
+  <Ecg variant="divider" />
+  <Contact />
 </Layout>

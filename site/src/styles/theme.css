@@ -1,0 +1,56 @@
+/* ==========================================================================
+   THEME — the ONE place to change colors, fonts and roundness.
+   "Calm Clinic" palette. Light is the default; dark applies when the
+   visitor clicks the moon button (stored per visitor).
+   Text colors were checked for WCAG AA contrast.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg: #faf7f2;          /* warm off-white page background */
+  --surface: #ffffff;     /* cards */
+  --line: #e7e1d7;        /* borders, dividers */
+
+  /* Text */
+  --ink: #1f3a44;         /* main text: deep teal-navy */
+  --muted: #5e6e73;       /* secondary text */
+
+  /* Accents */
+  --sage: #7ba591;        /* primary accent (lines, icons, decoration) */
+  --sage-ink: #4a7563;    /* sage dark enough for text */
+  --sage-soft: #e8f0eb;   /* sage tint backgrounds */
+  --coral: #e8836b;       /* buttons / highlights */
+  --coral-ink: #a84a33;   /* coral dark enough for text */
+  --coral-soft: #fbe9e3;  /* coral tint backgrounds */
+  --on-coral: #1f3a44;    /* text on coral buttons */
+
+  --shadow: 0 1px 2px rgb(31 58 68 / 0.05), 0 12px 28px -16px rgb(31 58 68 / 0.22);
+  --shadow-lift: 0 2px 4px rgb(31 58 68 / 0.06), 0 18px 36px -16px rgb(31 58 68 / 0.28);
+
+  /* Fonts */
+  --heading-font: "Fraunces Variable", Georgia, serif;
+  --body-font: "Source Sans 3 Variable", system-ui, sans-serif;
+
+  /* Shape */
+  --radius: 1.25rem;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #132229;
+  --surface: #1a2d35;
+  --line: #2a3f47;
+  --ink: #ede6da;
+  --muted: #a7b5b8;
+  --sage: #8fbba6;
+  --sage-ink: #8fbba6;
+  --sage-soft: #1d3436;
+  --coral: #f0937c;
+  --coral-ink: #f0a28f;
+  --coral-soft: #3a2a27;
+  --on-coral: #132229;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 28px -16px rgb(0 0 0 / 0.5);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.25), 0 18px 36px -16px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
