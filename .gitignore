@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.wrangler/
+.env
+# Source CV drafts stay local (not published)
+*.docx
