@@ -3,9 +3,9 @@ import Layout from "@/layouts/Layout.astro";
 import RabbitHop from "@/components/mascots/RabbitHop.astro";
 import { House } from "@lucide/astro";
 ---
-<Layout title="Page not found" noindex>
+<Layout title="Page not found" noindex footerMascot={false}>
   <section class="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-4 py-20 text-center">
-    <RabbitHop class="escapee h-24 w-auto text-ink" />
+    <div class="escapee-run"><RabbitHop class="escapee h-24 w-auto text-ink" /></div>
     <p class="eyebrow mt-6">Error 404</p>
     <h1 class="mt-2 text-4xl font-medium sm:text-5xl">This patient escaped.</h1>
     <p class="mt-3 text-muted">The page you were looking for isn't here. Let's get you back to the main page.</p>

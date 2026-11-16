@@ -12,7 +12,11 @@ const { class: cls = "" } = Astro.props;
   <path d="M30 33C38 26 52 25 60 29C62 30.5 61 33 58.5 33C50 32.5 41 33.5 34 37Z" fill="var(--surface)" />
   <path d="M38 31.2C44 29 51 28.6 56.5 30.4" stroke="var(--coral)" stroke-width="2" opacity=".45" />
   <circle cx="27" cy="42" r="12" fill="var(--surface)" />
-  <path d="M19.5 41.5q2 1.8 4 0M29.5 41.5q2 1.8 4 0" stroke-width="1.8" />
+  <path class="eyes-closed" d="M19.5 41.5q2 1.8 4 0M29.5 41.5q2 1.8 4 0" stroke-width="1.8" />
+  <g class="eyes-open" style="opacity:0">
+    <circle class="pupil" cx="21.5" cy="41.5" r="1.9" fill="currentColor" stroke="none" />
+    <circle class="pupil" cx="31.5" cy="41.5" r="1.9" fill="currentColor" stroke="none" />
+  </g>
   <ellipse cx="19" cy="46" rx="2.2" ry="1.4" fill="var(--coral)" opacity=".35" stroke="none" />
   <ellipse cx="34" cy="46" rx="2.2" ry="1.4" fill="var(--coral)" opacity=".35" stroke="none" />
   <path d="M25.4 45.3Q26.5 44.8 27.6 45.3Q26.5 47 25.4 45.3Z" fill="var(--coral)" stroke="var(--coral)" stroke-width="1" />

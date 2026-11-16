@@ -17,8 +17,8 @@ import T from "../T.astro";
       <h3 class="mb-5 text-2xl font-medium">How I practice</h3>
       <ul class="grid gap-5 sm:grid-cols-3">
         {ABOUT.values.map((v, i) => (
-          <li class="card relative p-6">
-            {i === 0 && <MousePeek class="peek absolute -top-[30px] right-6 h-8 w-auto text-ink" />}
+          <li class="card lift relative p-6">
+            {i === 0 && <div class="peek-wrap absolute bottom-full right-6 h-8 overflow-hidden" aria-hidden="true"><MousePeek class="peek block h-8 w-auto text-ink" /></div>}
             <h4 class="font-serif text-lg font-medium"><T text={v.title} /></h4>
             <p class="mt-2 text-muted"><T text={v.text} /></p>
           </li>
@@ -27,3 +27,14 @@ import T from "../T.astro";
     </div>
   )}
 </Section>
+
+<script>
+  // Peeking mouse: slide up once when the card comes into view.
+  const wrap = document.querySelector(".peek-wrap");
+  if (wrap) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { wrap.classList.add("in"); io.disconnect(); }
+    }, { rootMargin: "0px 0px -20% 0px" });
+    io.observe(wrap.parentElement!);
+  }
+</script>

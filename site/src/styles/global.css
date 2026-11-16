@@ -111,3 +111,94 @@
     font-size: 0.92em;
   }
 }
+
+/* ==========================================================================
+   MOTION — calm and small. Everything here only runs when the visitor has
+   NOT asked their device to reduce motion.
+   ========================================================================== */
+
+/* Soft hover lift on buttons and cards (all devices) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Gentle crossfade between pages (browsers that support it) */
+  @view-transition { navigation: auto; }
+
+  /* Sections fade + slide up 16px as they enter view */
+  @supports (animation-timeline: view()) {
+    .reveal > * {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0 entry 160px;
+    }
+    /* Experience timeline: the line grows as you scroll through it */
+    .timeline::before {
+      animation: grow-y linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 60%;
+    }
+    .timeline > li > .dot {
+      animation: pop linear both;
+      animation-timeline: view();
+      animation-range: entry 30% entry 70%;
+    }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes grow-y { from { transform: scaleY(0); } }
+  @keyframes pop { from { opacity: 0; transform: scale(0.3); } }
+
+  /* Peeking mouse slides up from behind its card (class added once when visible) */
+  .peek-wrap .peek { transform: translateY(105%); transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s; }
+  .peek-wrap.in .peek { transform: none; }
+
+  /* Footer rabbit: slow breathing and drifting z's */
+  .footer-rabbit .breath { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 4s ease-in-out infinite; }
+  .footer-rabbit .zz { animation: drift 4s ease-in-out infinite; }
+  @keyframes breathe { 50% { transform: scaleY(1.04); } }
+  @keyframes drift { 0%, 100% { opacity: 0.35; transform: translateY(1px); } 50% { opacity: 1; transform: translateY(-2px); } }
+
+  /* 404: rabbit hops in from the left and stops */
+  .escapee-run { animation: run-in 2.2s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+  .escapee-run .escapee { animation: hop 0.42s ease-in-out 5 both; }
+  @keyframes run-in { from { transform: translateX(-70vw); } }
+  @keyframes hop { 50% { transform: translateY(-14px) rotate(-4deg); } }
+
+  .paw { transition: opacity 0.4s ease, color 0.4s ease; }
+}
+
+/* Experience timeline line (drawn here so it can grow) */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--sage) 55%, transparent);
+  transform-origin: top;
+}
+
+/* Paw-print trail along the right edge (wide screens only) */
+.paw-trail { display: none; }
+@media (min-width: 1280px) {
+  .paw-trail {
+    display: flex;
+    position: fixed;
+    right: 22px;
+    top: 14vh;
+    bottom: 10vh;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 30;
+    pointer-events: none;
+  }
+}
+.paw { color: var(--sage); opacity: 0.18; }
+.paw.on { opacity: 0.75; }
+.paw:nth-child(odd) { transform: translateX(-9px) rotate(-12deg); }
+.paw:nth-child(even) { transform: translateX(5px) rotate(12deg); }

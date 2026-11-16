@@ -1,0 +1,22 @@
+---
+// Paw-print trail along the right edge; prints fill in as you scroll (wide screens only).
+import { PawPrint } from "@lucide/astro";
+const count = 12;
+---
+<div class="paw-trail" aria-hidden="true">
+  {Array.from({ length: count }, () => <PawPrint class="paw size-4" stroke-width={2} />)}
+</div>
+<script>
+  const paws = document.querySelectorAll<SVGElement>(".paw-trail .paw");
+  if (paws.length) {
+    let frame = 0;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const progress = max > 0 ? scrollY / max : 1;
+      const lit = Math.round(progress * paws.length);
+      paws.forEach((p, i) => p.classList.toggle("on", i < lit));
+    };
+    addEventListener("scroll", () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+</script>
