@@ -6,8 +6,11 @@ import MousePeek from "../mascots/MousePeek.astro";
 import T from "../T.astro";
 ---
 <Section id="about" eyebrow="About" title="About me">
-  <div class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
-    <PhotoSlot {...SITE.aboutPhoto} class="aspect-[4/3] w-full shadow-card md:aspect-[4/5]" />
+  <div class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-stretch">
+    <!-- From md up the photo is exactly as tall as the bio text next to it (filled, edges trimmed) -->
+    <div class="relative">
+      <PhotoSlot {...SITE.aboutPhoto} class="aspect-[4/3] w-full shadow-card md:absolute md:inset-0 md:aspect-auto md:h-full" />
+    </div>
     <div class="space-y-4 text-lg">
       {ABOUT.bio.map((p) => <p><T text={p} /></p>)}
     </div>

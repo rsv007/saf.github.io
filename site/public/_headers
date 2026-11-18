@@ -1,6 +1,0 @@
-# Security headers (read by both Netlify and Cloudflare Pages)
-/*
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()

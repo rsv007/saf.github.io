@@ -69,8 +69,6 @@ async function convert(htmlFile, { isHome }) {
     .replaceAll('href="/#', `href="${homeHref}#`)
     .replaceAll('href="/"', `href="${homeHref}"`);
 
-  // The contact form needs the real (Netlify) website, so hide it offline
-  if (isHome) html = html.replace(/<form name="contact"[\s\S]*?<\/form>/, "");
 
   // Sanity check: nothing should still point at the web server
   const leftovers = [...html.matchAll(/(?:href|src)="\/(?!\/)[^"]*"/g)].map((m) => m[0]);

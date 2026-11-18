@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 ---
 <footer class="mt-8 border-t border-line print:hidden">
   <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-12 text-center sm:px-6">
-    {mascot && <RabbitSleeping class="footer-rabbit h-14 w-auto text-ink" />}
+    {mascot && <RabbitSleeping class="footer-rabbit h-20 w-auto text-ink" />}
     <p class="font-serif text-lg">Thanks for visiting.</p>
     <p class="text-sm text-muted">
       © {year} {SITE.name}, {SITE.credential} · Built with <a class="underline underline-offset-2 hover:text-ink" href="https://astro.build">Astro</a> ·
@@ -16,15 +16,20 @@ const year = new Date().getFullYear();
 </footer>
 
 <script>
-  // Desktop only: the sleeping rabbit opens its eyes and looks at the pointer when it's near.
+  // Desktop only: when the pointer comes near, the sleeping rabbit wakes up: the z's fade away,
+  // its eyes open and its head and eyes follow the pointer. It dozes off again when the pointer leaves.
   const rabbit = document.querySelector<SVGSVGElement>(".footer-rabbit");
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (rabbit && fine && !calm) {
     const open = rabbit.querySelector<SVGGElement>(".eyes-open")!;
     const closed = rabbit.querySelector<SVGPathElement>(".eyes-closed")!;
+    const zz = rabbit.querySelector<SVGGElement>(".zz-wrap")!;
+    const head = rabbit.querySelector<SVGGElement>(".head")!;
     const pupils = rabbit.querySelectorAll<SVGCircleElement>(".pupil");
     open.style.transition = closed.style.transition = "opacity .25s ease";
+    zz.style.transition = "opacity .3s ease";
+    head.style.transition = "transform .35s cubic-bezier(.2,.8,.2,1)";
     let frame = 0;
     window.addEventListener("pointermove", (e) => {
       cancelAnimationFrame(frame);
@@ -32,12 +37,17 @@ const year = new Date().getFullYear();
         const r = rabbit.getBoundingClientRect();
         const cx = r.left + r.width * 0.28, cy = r.top + r.height * 0.65;
         const dx = e.clientX - cx, dy = e.clientY - cy;
-        const near = Math.hypot(dx, dy) < 220;
-        open.style.opacity = near ? "1" : "0";
-        closed.style.opacity = near ? "0" : "1";
-        const len = Math.hypot(dx, dy) || 1;
-        const k = 1.1; // how far the pupils move (in drawing units)
-        pupils.forEach((p) => p.setAttribute("transform", `translate(${(dx / len) * k} ${(dy / len) * k})`));
+        const dist = Math.hypot(dx, dy) || 1;
+        const awake = dist < 260;
+        open.style.opacity = awake ? "1" : "0";
+        closed.style.opacity = awake ? "0" : "1";
+        zz.style.opacity = awake ? "0" : "1";
+        // head lifts a little and leans toward the pointer (drawing units)
+        const hx = awake ? (dx / dist) * 2 : 0;
+        const hy = awake ? -1.5 + (dy / dist) * 1 : 0;
+        head.style.transform = `translate(${hx}px, ${hy}px)`;
+        const k = awake ? 1.1 : 0; // how far the pupils move
+        pupils.forEach((p) => p.setAttribute("transform", `translate(${(dx / dist) * k} ${(dy / dist) * k})`));
       });
     }, { passive: true });
   }

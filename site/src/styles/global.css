@@ -149,6 +149,17 @@
   .peek-wrap .peek { transform: translateY(105%); transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s; }
   .peek-wrap.in .peek { transform: none; }
 
+  /* Section dividers: like the hero heartbeat, the line draws itself left to right, holds, fades and
+     draws again, on a loop. Paused while off screen (class "live" is set by Layout.astro). */
+  html.motion-ok .ecg-draw { stroke-dasharray: 100; stroke-dashoffset: 100; animation: ecg-draw 3.6s linear infinite paused; }
+  html.motion-ok .ecg-divider.live .ecg-draw { animation-play-state: running; }
+  @keyframes ecg-draw {
+    0% { stroke-dashoffset: 100; opacity: .55; }
+    35% { stroke-dashoffset: 0; opacity: .55; }
+    75% { stroke-dashoffset: 0; opacity: .55; }
+    90%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+
   /* Footer rabbit: slow breathing and drifting z's */
   .footer-rabbit .breath { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 4s ease-in-out infinite; }
   .footer-rabbit .zz { animation: drift 4s ease-in-out infinite; }

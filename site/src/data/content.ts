@@ -15,10 +15,11 @@
    - Photos: put the image file in the  public/photos/  folder, then set
      src: "/photos/your-file.jpg". Leave src: "" to show the placeholder frame.
    - The downloadable CV is the file  public/cv.pdf  — replace that file.
+     The CV page (/cv) shows the same words: update  src/data/cv.ts  to match.
    ========================================================================== */
 
 export const SITE = {
-  url: "https://example.com", // [ASK: final web address once the domain is chosen] — also update public/robots.txt
+  url: "https://rsv007.github.io", // the live address (GitHub Pages). If it changes, also update public/robots.txt
   name: "Shaina Furman",
   credential: "DVM",
   pronouns: "she/her",
@@ -326,5 +327,4 @@ export const CONTACT = {
   heading: "Get in touch",
   // A short line in Shaina's own words. Leave "" to hide it.
   text: "Contact me for any questions.",
-  showForm: true, // simple contact form (works once the site is hosted on Netlify)
 };

@@ -57,6 +57,11 @@ const ogImage = new URL("/og-image.png", SITE.url).href;
         }, { rootMargin: "0px 0px -8% 0px" });
         document.querySelectorAll(".reveal > *").forEach((el) => io.observe(el));
         root.classList.add("reveal-ready");
+        // Heartbeat dividers only run while on screen
+        const live = new IntersectionObserver((entries) => {
+          for (const e of entries) e.target.classList.toggle("live", e.isIntersecting);
+        });
+        document.querySelectorAll(".ecg-divider").forEach((el) => live.observe(el));
       }
     </script>
   </body>

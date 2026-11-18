@@ -2,63 +2,26 @@
 import { SITE, CONTACT } from "@/data/content";
 import Section from "../Section.astro";
 import LinkedInIcon from "../LinkedInIcon.astro";
-import { Mail, Copy, Check, Send } from "@lucide/astro";
+import { Mail, Copy, Check } from "@lucide/astro";
 import T from "../T.astro";
 const linkedinReady = SITE.linkedin.startsWith("http");
 ---
 <Section id="contact" eyebrow="Contact" title={CONTACT.heading}>
-  <div class="grid gap-8 md:grid-cols-2">
+  <div class="max-w-xl">
     <div>
       {CONTACT.text && <p class="mb-6 text-lg"><T text={CONTACT.text} /></p>}
-      <div class="card flex flex-wrap items-center gap-3 p-4">
+      <div class="flex flex-wrap items-center gap-3">
         <a href={`mailto:${SITE.email}`} class="btn btn-primary"><Mail class="size-4" stroke-width={2.25} aria-hidden="true" /> {SITE.email}</a>
         <button type="button" class="copy-email btn btn-secondary" data-email={SITE.email}>
           <Copy class="icon-copy size-4" stroke-width={2.25} aria-hidden="true" />
           <Check class="icon-done hidden size-4" stroke-width={2.25} aria-hidden="true" />
           <span class="label">Copy email</span>
         </button>
+        {linkedinReady && <a href={SITE.linkedin} class="btn btn-secondary"><LinkedInIcon class="size-4 text-sage-ink" /> LinkedIn</a>}
       </div>
-      <p class="mt-4 flex items-center gap-2">
-        <LinkedInIcon class="size-5 text-sage-ink" />
-        {linkedinReady ? <a href={SITE.linkedin} class="underline underline-offset-4">LinkedIn</a> : <T text={SITE.linkedin} />}
-      </p>
     </div>
-    {CONTACT.showForm && (
-      <form name="contact" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company-website" class="card space-y-4 p-6">
-        <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden"><label>Leave empty <input name="company-website" /></label></p>
-        <div>
-          <label for="c-name" class="mb-1 block font-semibold">Name</label>
-          <input id="c-name" name="name" required autocomplete="name" class="field" />
-        </div>
-        <div>
-          <label for="c-email" class="mb-1 block font-semibold">Email</label>
-          <input id="c-email" name="email" type="email" required autocomplete="email" class="field" />
-        </div>
-        <div>
-          <label for="c-org" class="mb-1 block font-semibold">Organization <span class="font-normal text-muted">(optional)</span></label>
-          <input id="c-org" name="organization" autocomplete="organization" class="field" />
-        </div>
-        <div>
-          <label for="c-msg" class="mb-1 block font-semibold">Message</label>
-          <textarea id="c-msg" name="message" rows="4" required class="field"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary"><Send class="size-4" stroke-width={2.25} aria-hidden="true" /> Send message</button>
-      </form>
-    )}
   </div>
 </Section>
-<style>
-  .field {
-    width: 100%;
-    border: 1px solid var(--line);
-    background: var(--bg);
-    border-radius: 0.75rem;
-    padding: 0.6rem 0.8rem;
-    color: var(--ink);
-  }
-  .field:focus-visible { outline-offset: 1px; }
-</style>
 <script>
   document.querySelectorAll<HTMLButtonElement>(".copy-email").forEach((btn) => {
     btn.addEventListener("click", async () => {
