@@ -19,7 +19,7 @@
    ========================================================================== */
 
 export const SITE = {
-  url: "https://rsv007.github.io", // the live address (GitHub Pages). If it changes, also update public/robots.txt
+  url: "https://shainafurman.github.io", // the live address (GitHub Pages). If it changes, also update public/robots.txt
   name: "Shaina Furman",
   credential: "DVM",
   pronouns: "she/her",
