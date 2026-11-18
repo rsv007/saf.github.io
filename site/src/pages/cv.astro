@@ -56,7 +56,7 @@ const linkedinReady = SITE.linkedin.startsWith("http");
       <section>
         <h2>Research experience</h2>
         {RESEARCH.map((r) => (
-          <div class="entry"><div class="row"><strong>{r.title}</strong><span>{r.year}</span></div><p class="sub">{r.org}</p><p>{r.text}</p></div>
+          <div class="entry"><div class="row"><strong>{r.title}</strong><span>{r.year}</span></div><p class="sub">{r.org}</p><p>{r.text}{r.status && <> <em>{r.status}.</em></>}</p></div>
         ))}
       </section>
 
@@ -72,12 +72,12 @@ const linkedinReady = SITE.linkedin.startsWith("http");
       {PRESENTATIONS.length > 0 && (
         <section>
           <h2>Selected scientific presentations</h2>
-          <ul>{PRESENTATIONS.map((p) => <li>{p.title} ({p.year})</li>)}</ul>
+          <ul>{PRESENTATIONS.map((p) => <li>{p.title}{p.venue && <>. {p.venue}</>} ({p.year})</li>)}</ul>
         </section>
       )}
 
       <section>
-        <h2>Licensure & certifications</h2>
+        <h2>Licensure, certifications & memberships</h2>
         <ul>
           {LICENSES.map((l) => <li><T text={l.name} />{l.status && <> — <T text={l.status} /></>}</li>)}
           {CERTIFICATIONS.map((c) => <li>{c.name}{c.status && <> — <T text={c.status} /></>}</li>)}

@@ -1,7 +1,7 @@
 // Builds an offline copy of the site that opens by double-clicking — no server, no internet.
 // Usage:  npm run offline
-// Output: ../Shaina-Furman-website-preview.zip  (homepage, CV page and CV PDF, everything packed inside)
-import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync, existsSync } from "node:fs";
+// Output: ../Shaina-Furman-website-preview.zip  (homepage, CV page, CV PDF and photos, everything packed inside)
+import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync, cpSync, existsSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -64,6 +64,7 @@ async function convert(htmlFile, { isHome }) {
   // Links between pages
   html = html
     .replaceAll('href="/cv.pdf"', 'href="cv.pdf"')
+    .replaceAll('src="/photos/', 'src="photos/')
     .replaceAll('href="/cv"', `href="${CV}"`)
     .replaceAll('href="/#', `href="${homeHref}#`)
     .replaceAll('href="/"', `href="${homeHref}"`);
@@ -85,6 +86,7 @@ mkdirSync(outDir);
 writeFileSync(join(outDir, HOME), await convert("index.html", { isHome: true }));
 writeFileSync(join(outDir, CV), await convert("cv/index.html", { isHome: false }));
 copyFileSync(join(dist, "cv.pdf"), join(outDir, "cv.pdf"));
+if (existsSync(join(dist, "photos"))) cpSync(join(dist, "photos"), join(outDir, "photos"), { recursive: true });
 
 if (existsSync(zipPath)) rmSync(zipPath);
 execFileSync("zip", ["-r", "-q", `${outName}.zip`, outName], { cwd: join(root, "..") });

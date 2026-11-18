@@ -11,6 +11,7 @@ import T from "../T.astro";
         <p class="text-sm font-semibold text-sage-ink">{r.year} · {r.org}</p>
         <h3 class="mt-1 font-serif text-lg font-medium leading-snug">{r.title}</h3>
         <p class="mt-2 text-muted">{r.text}</p>
+        {r.status && <span class="chip mt-3 text-sm">{r.status}</span>}
       </li>
     ))}
   </ul>
@@ -36,7 +37,7 @@ import T from "../T.astro";
         <h3 class="mb-4 flex items-center gap-2 text-2xl font-medium"><Presentation class="size-6 text-sage-ink" stroke-width={1.75} aria-hidden="true" /> Presentations</h3>
         <ul class="space-y-3">
           {PRESENTATIONS.map((p) => (
-            <li class="flex gap-3"><span class="w-12 shrink-0 text-sm font-semibold text-sage-ink pt-0.5">{p.year}</span><span>{p.title}</span></li>
+            <li class="flex gap-3"><span class="w-12 shrink-0 text-sm font-semibold text-sage-ink pt-0.5">{p.year}</span><span>{p.title}{p.venue && <span class="mt-0.5 block text-sm text-muted">{p.venue}</span>}</span></li>
           ))}
         </ul>
       </div>
